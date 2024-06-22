@@ -53,9 +53,19 @@ SELECT count(id),department_id from degrees GROUP BY department_id ORDER BY `deg
 -- esercizio con JOIN
 
 -- Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
-SELECT * FROM students WHERE degree_id = 53;
+SELECT * FROM students INNER JOIN degrees  ON degrees.id = students.degree_id WHERE degree_id = 53
 
+-- Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
+SELECT * FROM degrees WHERE name LIKE '%magistrale%'
 
+-- Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
+SELECT * 
+FROM departments 
+INNER JOIN degrees ON degrees.department_id = departments.id 
+WHERE degrees.name LIKE '%magistrale%' AND departments.name LIKE '%neuroscienze%'
 
+-- Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
 
-SELECT * FROM courses GROUP BY year
+SELECT *
+FROM course_teacher
+INNER JOIN teachers ON teachers.id = course_teacher.teacher_id where teacher_id = 44
