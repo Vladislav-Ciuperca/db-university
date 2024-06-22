@@ -30,3 +30,32 @@ UPDATE `teachers` SET `office_number` = '126' WHERE `teachers`.`id` = 58;
 
 -- Eliminare dalla tabella studenti il record creato precedentemente al punto 9
 DELETE FROM students WHERE name = 'vladislav' AND surname = 'ciuperca';
+
+-------------------------------------------------------------------------------
+-- esercizio GROUP BY
+
+-- Contare quanti iscritti ci sono stati ogni anno
+SELECT COUNT(id), year FROM courses GROUP BY year;
+SELECT year, COUNT(*)  FROM courses GROUP BY year;
+
+-- Contare gli insegnanti che hanno l'ufficio nello stesso edificio
+SELECT  office_address, COUNT(*) AS insegnanti_in_edificio FROM teachers GROUP BY office_address
+SELECT COUNT(*) AS insegnanti_in_edificio, office_address FROM teachers GROUP BY office_address
+
+-- Calcolare la media dei voti di ogni appello d'esame
+SELECT student_id, AVG(vote) from exam_student GROUP BY student_id
+
+-- Contare quanti corsi di laurea ci sono per ogni dipartimento
+SELECT count(id),department_id from degrees GROUP BY department_id ORDER BY `degrees`.`id` ASC;
+
+
+----------------------------------------------------------
+-- esercizio con JOIN
+
+-- Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
+SELECT * FROM students WHERE degree_id = 53;
+
+
+
+
+SELECT * FROM courses GROUP BY year
